@@ -8,11 +8,9 @@
         </v-row>
     </v-container>
 </template>
-
 <script>
 import VoteTab from "../components/VoteTab";
 import VoteDialog from "../components/VoteDialog";
-
 export default {
     name: "Vote",
     components: {

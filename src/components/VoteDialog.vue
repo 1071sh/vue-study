@@ -41,7 +41,7 @@
                     <v-btn color="blue darken-1" text @click="dialog = false">
                         Close
                     </v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">
+                    <v-btn color="blue darken-1" text @click="sendData">
                         投票する
                     </v-btn>
                 </v-card-actions>
@@ -63,5 +63,11 @@ export default {
     data: () => ({
         dialog: false,
     }),
+    methods: {
+        sendData() {
+            console.log(this.inputData);
+            this.dialog = false;
+        },
+    },
 };
 </script>
