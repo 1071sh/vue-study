@@ -18,6 +18,11 @@
                             Sed a libero.
                         </p>
                     </v-card-text>
+                    <v-card-actions>
+                        <v-btn outlined @click="vote(member.id)">
+                            投票する
+                        </v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-tab-item>
         </v-tabs>
@@ -33,6 +38,11 @@ export default {
                 id: index + 1,
                 name: "member-" + (index + 1),
             }));
+        },
+    },
+    methods: {
+        vote(id) {
+            console.log(id);
         },
     },
 };
