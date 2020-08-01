@@ -19,14 +19,17 @@
                     </th>
                     <th class="text-center">
                         総合点
-                        <v-btn @click="sortMembersData('total')" icon>
+                        <v-btn @click="sortMembersData('totalPoint')" icon>
                             <v-icon>mdi-arrow-down</v-icon>
                         </v-btn>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="member in membersData" :key="`tr-${member.id}`">
+                <tr
+                    v-for="member in membersDataWithTotalPoint"
+                    :key="`tr-${member.id}`"
+                >
                     <td class="text-center">{{ member.id }}</td>
                     <td class="text-center">{{ member.name }}</td>
                     <td class="text-center">
@@ -35,9 +38,7 @@
                     <td class="text-center">
                         {{ member.servicePoint | pointToChars }}
                     </td>
-                    <td class="text-center">
-                        {{ (member.tecPoint + member.servicePoint) / 2 }}
-                    </td>
+                    <td class="text-center">{{ member.totalPoint }}</td>
                 </tr>
             </tbody>
         </template>
@@ -46,7 +47,14 @@
 
 <script>
 export default {
-    computed: {},
+    computed: {
+        membersDataWithTotalPoint() {
+            return this.membersData.map(member => {
+                member.totalPoint = (member.tecPoint + member.servicePoint) / 2;
+                return member;
+            });
+        }
+    },
     filters: {
         pointToChars: point => ["S", "A", "B", "C", "D"][point - 1]
     },
@@ -60,22 +68,9 @@ export default {
     }),
     methods: {
         sortMembersData(sortType) {
-            switch (sortType) {
-                case "tecPoint":
-                case "servicePoint":
-                    this.membersData.sort((a, b) => {
-                        return a[sortType] > b[sortType] ? -1 : 1;
-                    });
-                    break;
-                case "total":
-                    this.membersData.sort((a, b) => {
-                        return a.tecPoint + a.servicePoint >
-                            b.tecPoint + b.servicePoint
-                            ? -1
-                            : 1;
-                    });
-                    break;
-            }
+            this.membersData.sort((a, b) => {
+                return a[sortType] > b[sortType] ? -1 : 1;
+            });
         }
     }
 };
