@@ -2,9 +2,7 @@
     <v-row justify="center">
         <v-dialog v-model="dialog" persistent max-width="360px">
             <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                    Open Dialog
-                </v-btn>
+                <v-btn color="primary" dark v-bind="attrs" v-on="on">Open Dialog</v-btn>
             </template>
             <v-card>
                 <v-card-title>
@@ -14,9 +12,9 @@
                     <v-row>
                         <v-col cols="12">
                             <p class="subtitle">技術点</p>
-                            <v-radio-group row v-model="inputData.tecPoint">
+                            <v-radio-group row v-model="tecPoint">
                                 <v-radio
-                                    v-for="(n, index) in 'SABCD'.split('')"
+                                    v-for="(n,index) in 'SABCD'.split('')"
                                     :key="'tec-' + n"
                                     :label="n"
                                     :value="index + 1"
@@ -25,9 +23,9 @@
                         </v-col>
                         <v-col cols="12">
                             <p class="subtitle">サービス点</p>
-                            <v-radio-group row v-model="inputData.servicePoint">
+                            <v-radio-group row v-model="servicePoint">
                                 <v-radio
-                                    v-for="(n, index) in 'SABCD'.split('')"
+                                    v-for="(n,index) in 'SABCD'.split('')"
                                     :key="'service-' + n"
                                     :label="n"
                                     :value="index + 1"
@@ -38,12 +36,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="dialog = false">
-                        Close
-                    </v-btn>
-                    <v-btn color="blue darken-1" text @click="sendData">
-                        投票する
-                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                    <v-btn color="blue darken-1" text @click="sendData">投票する</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -52,13 +46,17 @@
 
 <script>
 export default {
+    props: {
+        tecPoint: Number,
+        servicePoint: Number,
+    },
     computed: {
-        inputData() {
-            return {
-                tecPoint: 0,
-                servicePoint: 0,
-            };
-        },
+        // inputData() {
+        //   return {
+        //     tecPoint: 3,
+        //     servicePoint: 3,
+        //   };
+        // },
     },
     data: () => ({
         dialog: false,
