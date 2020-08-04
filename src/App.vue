@@ -26,11 +26,11 @@ export default {
         // Vote,
         // List,
         // ProductInfo,
-        Header,
+        Header
     },
 
     data: () => ({
         //
-    }),
+    })
 };
 </script>
